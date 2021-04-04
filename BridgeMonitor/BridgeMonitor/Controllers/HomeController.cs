@@ -39,32 +39,7 @@ namespace BridgeMonitor.Controllers
             return View();
         }
 
-        public IActionResult fermeture()
-        {
-            var bridges = GetBridgeMonitorListFromApi();
-            var bridges_before = new List<Bridge>();
-            var bridges_after = new List<Bridge>();
-            var bridge_result = new fermeture()
-            {
-                BridgesBefore = bridges_before,
-                BridgesAfter = bridges_after
-            };
-            bridges.Sort((x, y) => DateTime.Compare(x.ClosingDate, y.ClosingDate));
-            DateTime now = DateTime.Now;
-            foreach (var bridge in bridges)
-            {
-                if (bridge.ClosingDate > now)
-                {
-                    bridges_after.Add(bridge);
-                }
-                else
-                {
-                    bridges_before.Add(bridge);
-                }
-            }
 
-            return View(bridge_result);
-        }
 
         public IActionResult Privacy()
         {
