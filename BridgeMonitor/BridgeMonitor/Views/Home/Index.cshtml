@@ -1,0 +1,37 @@
+﻿@{ ViewData["Title"] = "Prochaine fermeture";
+                var bridge = Model;
+                var a = bridge.ClosingDate;
+                var b = bridge.ReopeningDate;
+                var c = -(a - b); }
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table class="table-responsive">
+            <tbody>
+                <tr>
+                    <th>Nom du bateau / Raison de la fermeture</th>
+                    <th>Date de fermeture</th>
+                    <th>Date de réouverture</th>
+                    <th>Durée de la fermeture</th>
+                    <th>Risque de bouchon</th>
+                </tr>
+                <tr>
+                    <td>@bridge.BoatName</td>
+                    <td>@bridge.ClosingDate</td>
+                    <td>@bridge.ReopeningDate</td>
+                    <td>@c</td>
+                    @if (a.Hour >= 7 && a.Hour <= 9 || a.Hour >= 17 && a.Hour <= 19 || b.Hour >= 7 && b.Hour <= 9 || b.Hour >= 17 && b.Hour < 19)
+                    {
+        <td>Elevé</td> }
+                    else
+                    {
+        <td>Faible</td>}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
