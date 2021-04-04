@@ -1,0 +1,58 @@
+@model fermeture
+@{ ViewData["Title"] = "Toutes les fermetures"; }
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div class="row justify-content-center">
+    
+    <div class="col-auto">
+        <table class="table-responsive">
+            <tbody>
+                <tr>
+                    <th>Nom du bateau / Raison de la fermeture</th>
+                    <th>Date de fermeture</th>
+                    <th>Durée de la fermeture</th>
+                </tr>
+                @foreach (var bridge in Model.BridgesAfter)
+                {
+                <tr>
+                    <td>@bridge.BoatName</td>
+                    @{ var a= bridge.ClosingDate;
+                            var b = bridge.ReopeningDate;
+                            var c = -(a - b); }
+                    <td>@bridge.ClosingDate</td>
+                    <td>@c</td>
+                </tr>
+}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <h2 class="display-4">Fermetures précédentes</h2>
+    <div class="col-auto">
+        <table class="table-responsive">
+            <tbody>
+                <tr>
+                    <th>Nom du bateau / Raison de la fermeture</th>
+                    <th>Date de fermeture</th>
+                    <th>Durée de la fermeture</th>
+                </tr>
+                @foreach (var bridge in Model.BridgesBefore)
+                {
+                <tr>
+                    <td>@bridge.BoatName</td>
+                    @{ var a = bridge.ClosingDate;
+                            var b = bridge.ReopeningDate;
+                            var c = -(a - b); }
+                    <td>@bridge.ClosingDate</td>
+                    <td>@c</td>
+                </tr>
+}
+            </tbody>
+        </table>
+    </div>
+</div>
